@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option go_package = "github.com/go-grpc/protos";
+
+package product;
+
+service Product {
+    rpc GetProducts (Empty ) returns (stream ProductInfo);
+    rpc GetProduct (Id) returns (ProductInfo);
+    rpc CreateProduct (ProductInfo) returns (Id);
+    rpc UpdateProduct (ProductInfo) returns (Status);
+    rpc DeleteProduct (Id) returns (Status); 
+
+}
+
+message Empty {}
+
+message ProductInfo {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    float price = 4; 
+}
+    
+message Id {
+    string value = 1;
+}
+
+message Status {
+    int32 value = 1;
+}
+
+message ProductsInfo {
+    repeated ProductInfo products = 1;
+}
